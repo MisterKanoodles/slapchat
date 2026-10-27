@@ -1,4 +1,3 @@
-Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
 # Slapchat
 
 A mobile-first social camera web app inspired by the camera-first Snapchat experience from 2018. This repository currently contains a front-end prototype with sample Stories, friends, streaks, and chat UI.
