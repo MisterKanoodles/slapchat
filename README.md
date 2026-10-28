@@ -2,6 +2,10 @@
 
 A mobile-first camera and Stories prototype inspired by the camera-first Snapchat experience from 2018.
 
+## Brand asset
+
+The Slapchat logo and Home Screen icon are in [`slapchat-icon.png`](./slapchat-icon.png).
+
 ## Try the prototype
 
 The repository contains the app files; it is not yet published as a website. After it is hosted over HTTPS, open it in Safari on iPhone and tap **How it works** or **Help** for the in-app guide. Camera access requires HTTPS; **Use iPhone camera** opens the native photo capture flow.
