@@ -68,6 +68,7 @@ async function startCamera() {
       audio: false
     });
     video.srcObject = cameraStream;
+    video.classList.toggle("is-front-facing", facingMode === "user");
     await video.play();
     stage.classList.add("is-live");
   } catch (error) {
