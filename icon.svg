@@ -1,17 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Slapchat mascot">
   <rect width="96" height="96" rx="24" fill="#ffdf38"/>
-  <path d="M35 22c8-7 22-8 31-1 7 5 10 14 9 23l-2 12c-2 10-10 16-22 17l-4 10H30l7-14c-8-5-12-13-12-23 0-11 3-19 10-24Z" fill="#f6c79d" stroke="#171715" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M27 43c-2-16 9-29 25-30 12-1 21 6 25 17-9-5-17-5-23-1-7 4-15 8-27 8Z" fill="#171715"/>
-  <path d="M59 39h1" stroke="#171715" stroke-width="5" stroke-linecap="round"/>
-  <path d="m70 45 10 3-9 5" fill="none" stroke="#171715" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M63 59q4-3 8-1" fill="none" stroke="#171715" stroke-width="3" stroke-linecap="round"/>
-  <path d="M0 56 15 50l10-10q3-3 6 0l-4 8 10-5q4-2 6 2l-8 8 8-2q5 0 2 5L34 66l-15 6L0 73Z" fill="#f6c79d" stroke="#171715" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M1 57v15" stroke="#171715" stroke-width="5"/>
-  <path d="m26 34-5-7m14 2 1-7m-9 28 7-3" fill="none" stroke="#171715" stroke-width="3" stroke-linecap="round"/>
-  <path d="m76 40 7-8m-2 18 10-1m-17-19 1-7" fill="none" stroke="#171715" stroke-width="3" stroke-linecap="round"/>
-  <path d="m75 53 8-10" stroke="#fff8e0" stroke-width="2" stroke-dasharray="2 4" stroke-linecap="round"/>
-  <g transform="rotate(-35 85 28)">
-    <rect x="75" y="24" width="19" height="7" rx="3.5" fill="#fffdf7" stroke="#171715" stroke-width="2"/>
-    <path d="M89 24v7" stroke="#ef684f" stroke-width="3"/>
+  <g transform="rotate(7 51 48)">
+    <path d="M36 23c8-7 22-7 30 1 7 7 9 19 6 30-3 11-11 17-22 17S31 64 28 54c-4-11-2-24 8-31Z" fill="#f3c093" stroke="#171715" stroke-width="5"/>
+    <path d="M29 43c-3-17 8-29 23-29 12 0 20 7 23 19-8-5-14-6-20-2-7 5-15 8-26 7Z" fill="#171715"/>
+    <path d="M46 42h1m12 1h1" stroke="#171715" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="58" cy="57" rx="4" ry="5.5" fill="#171715"/>
+  </g>
+  <path d="M0 55 17 48l9-10c3-3 7-1 7 2l-4 8 9-5c4-2 7 2 4 5l-8 8 8-2c5 0 6 4 2 7L33 67l-15 6L0 75Z" fill="#f3c093" stroke="#171715" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M1 56v17" stroke="#171715" stroke-width="5"/>
+  <path d="m28 34-4-6m14 1 1-7m8 22 7-3" fill="none" stroke="#171715" stroke-width="3" stroke-linecap="round"/>
+  <path d="m72 47 11-13m-5 25 11-2m-20-27 2-9" fill="none" stroke="#171715" stroke-width="3" stroke-linecap="round"/>
+  <path d="m68 53 12-15" stroke="#fff9e4" stroke-width="2" stroke-dasharray="2 4" stroke-linecap="round"/>
+  <g transform="rotate(-38 83 27)">
+    <rect x="73" y="23" width="21" height="8" rx="4" fill="#fffdf7" stroke="#171715" stroke-width="2"/>
+    <path d="M89 23v8" stroke="#ee624a" stroke-width="3.5"/>
   </g>
 </svg>
