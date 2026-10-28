@@ -1,0 +1,12 @@
+{
+  "name": "Slapchat",
+  "short_name": "Slapchat",
+  "description": "Catch the moment. Share it. Let it go.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f7f3",
+  "theme_color": "#f8f7f3",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
