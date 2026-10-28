@@ -38,7 +38,7 @@ button:focus-visible { outline: 3px solid #5b9cff; outline-offset: 3px; }
 .distant-hill { position: absolute; left: -18%; bottom: 24%; width: 140%; height: 31%; border-radius: 50% 50% 0 0 / 22% 28% 0 0; background: linear-gradient(120deg, #9b816cbb, #c0a07cbb 48%, #817c66bb); filter: blur(1px); }
 .near-hill { position: absolute; left: -10%; bottom: -8%; width: 120%; height: 41%; border-radius: 50% 50% 0 0 / 24% 22% 0 0; background: linear-gradient(145deg, #4f6857, #73836c 52%, #35483d); }
 .camera-video, .captured-photo { position: absolute; inset: 0; display: none; width: 100%; height: 100%; object-fit: cover; }
-.camera-video { transform: scaleX(-1); }
+.camera-video.is-front-facing { transform: scaleX(-1); }
 .camera-stage.is-live .camera-video, .camera-stage.has-photo .captured-photo { display: block; }
 .camera-stage.is-live .ambient-art, .camera-stage.has-photo .ambient-art { display: none; }
 .camera-topline { position: absolute; top: calc(13px + var(--safe-top)); left: 14px; right: 14px; display: flex; align-items: center; justify-content: space-between; color: #fff; }
