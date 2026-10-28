@@ -1,24 +1,31 @@
 # Slapchat
 
-A mobile-first social camera web app inspired by the camera-first Snapchat experience from 2018. This repository currently contains a front-end prototype with sample Stories, friends, streaks, and chat UI.
+A mobile-first social camera web app inspired by the camera-first Snapchat experience from 2018.
+
+## Try the prototype
+
+Open the live Slapchat website in Safari on iPhone. Tap **How to use** or **Help** for the in-app guide. Camera access requires a secure HTTPS website; if you are opening a local preview, choose **Use iPhone camera**.
+
+The camera is a demo: captured photos appear only as a preview on your device. Chats, Stories, and Discover use sample content; there is no account system or message sharing yet.
+
+## Add to iPhone Home Screen
+
+1. Open the live website in **Safari**.
+2. Tap **Share**.
+3. Scroll down and tap **Add to Home Screen**.
+4. Tap **Add**.
+
+The site includes iPhone safe-area layout, a home-screen manifest, and offline shell caching after the first visit.
 
 ## Run locally
 
-Open `index.html` in a modern browser. No build step or dependencies are required.
+Open `index.html` in a modern browser. No build step or dependencies are required. Camera streaming works only from a secure context (HTTPS or localhost).
 
-## iPhone setup
+## Current prototype features
 
-Deploy the site over HTTPS, open it in Safari on iPhone, tap **Share**, then **Add to Home Screen**. The app includes iOS safe-area spacing, a camera capture button, a home-screen manifest, and a small offline cache.
-
-## Team workflow
-
-Create feature branches for changes and open pull requests so teammates can review them before merging.
-
-## Current prototype
-
-- Responsive camera-first layout with desktop side panels and iPhone bottom navigation
-- iOS-aware viewport sizing, notch and home-indicator spacing, and large touch targets
-- Sample Stories, friend activity, chats, streaks, and Discover content
-- Camera button opens the phone’s photo capture flow; snaps are previewed in the UI
-- Offline shell caching after the first visit
-- No sign-in, persistent messaging, backend, or real social account data yet
+- Camera-first mobile layout with labeled navigation and touch-sized controls
+- Live camera preview with front/back camera switching when supported
+- Native iPhone photo capture fallback and on-device snap preview
+- In-app instructions for camera, Stories, Chats, and iPhone installation
+- Sample Stories, friends, streaks, and Discover content
+- No sign-in, persistent messaging, backend, or social account data
