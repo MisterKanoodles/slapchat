@@ -1,29 +1,49 @@
 # Slapchat
 
-A mobile-first camera and Stories prototype inspired by the camera-first Snapchat experience from 2018.
+A camera-first app for a few friends, inspired by Snapchat circa 2018: snaps, Stories, and chats.
 
-## Try the prototype
+Live at **https://misterkanoodles.github.io/slapchat/**. Every push to `main` builds and deploys through GitHub Actions.
 
-The repository contains the app files; it is not yet published as a website. After it is hosted over HTTPS, open it in Safari on iPhone and tap **How it works** or **Help** for the in-app guide. Camera access requires HTTPS; **Use iPhone camera** opens the native photo capture flow.
+## How it works
 
-The camera is a demo: captured photos appear only as a preview on your device. Chats and Stories use sample content; there is no sign-in, messaging, or backend yet.
+- Opens straight to a full-screen camera. Swipe right for **Chats**, left for **Stories**, or tap the buttons beside the shutter.
+- Tap the shutter to snap; double-tap the screen to flip cameras. **Use phone camera** opens the native iPhone camera when live camera access isn't available.
+- Tap a friend's Story to play it; tap right to skip, left to go back.
+- Tap your avatar for the quick guide.
+
+Snaps stay on your device for now. Chats, Stories, and Discover use sample data; there are no accounts or backend yet.
 
 ## Add to iPhone Home Screen
 
-1. Open the live website in Safari.
-2. Tap **Share**.
-3. Scroll down and tap **Add to Home Screen**.
-4. Tap **Add**.
+Open the live site in Safari → **Share** → **Add to Home Screen** → **Add**. It launches full screen like a native app.
 
-## Work on the project
+## Develop
 
-Open `index.html` in a modern browser. No build step or dependencies are required. Keep page structure in `index.html`, visual styles in `styles.css`, and interactions in `app.js`.
+Requires Node 20+.
 
-## Prototype features
+```bash
+npm install
+npm run dev      # local dev server (also on your LAN with --host)
+npm run build    # production build into dist/
+```
 
-- iPhone safe-area layout and labeled touch navigation
-- Live camera preview with front/back switching when supported
-- Native iPhone photo capture fallback and local snap preview
-- In-app guide for the camera, Stories, chats, and installation
-- Sample Stories, friends, streaks, and Discover content
-- Home-screen manifest and offline shell caching
+The camera only streams on `localhost` or HTTPS. To test on a phone, use the deployed site.
+
+## Project layout
+
+```
+index.html              Vite entry
+public/                 Copied as-is: icon, web manifest, service worker
+src/main.jsx            React bootstrap + service worker registration
+src/App.jsx             Swipe pager (Chats | Camera | Stories), overlays, toasts
+src/components/         One file per screen or overlay
+src/hooks/useCamera.js  Camera stream: start, flip, capture
+src/data/sampleData.js  Placeholder friends, Stories, Discover
+src/styles.css          All styles
+```
+
+The service worker is network-first, so installed copies pick up new deploys on the next launch and fall back to the cache offline.
+
+## Working on it
+
+Two agents (Claude and Codex) contribute to this repo. Work on a branch, open a PR into `main`, and keep each PR to one feature or screen so changes don't collide.
