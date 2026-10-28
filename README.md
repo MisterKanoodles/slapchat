@@ -4,7 +4,7 @@ A mobile-first social camera web app inspired by the camera-first Snapchat exper
 
 ## Try the prototype
 
-Open the live Slapchat website in Safari on iPhone. Tap **How to use** or **Help** for the in-app guide. Camera access requires a secure HTTPS website; if you are opening a local preview, choose **Use iPhone camera**.
+The repository contains the app files; it is not yet published as a website. To try it on iPhone, first host the site over HTTPS, then open that site in Safari. Tap **How to use** or **Help** for the in-app guide. Camera access requires HTTPS; if you are opening a local preview, choose **Use iPhone camera**.
 
 The camera is a demo: captured photos appear only as a preview on your device. Chats, Stories, and Discover use sample content; there is no account system or message sharing yet.
 
