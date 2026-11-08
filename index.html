@@ -2,127 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f6f5f0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Slapchat">
   <meta name="format-detection" content="telephone=no">
   <meta name="description" content="Catch the moment. Share it. Let it go.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" type="image/png" href="./slapchat-icon.png?v=4">
-  <link rel="apple-touch-icon" href="./slapchat-icon.png?v=4">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=4">
   <title>Slapchat</title>
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar" aria-label="Main menu">
-      <a class="brand" href="#" aria-label="Slapchat home"><img src="./slapchat-icon.png?v=4" alt=""><span>slapchat</span></a>
-      <nav class="side-nav">
-        <button type="button" data-nav="chats" onclick="openChats()"><span>▣</span> Chats</button>
-        <button type="button" class="is-active" data-nav="camera"><span>◉</span> Camera</button>
-        <button type="button" data-nav="stories" onclick="document.querySelector('.stories').scrollIntoView({behavior:'smooth'})"><span>◌</span> Stories</button>
-        <button type="button" data-nav="discover" onclick="showToast('Discover is a preview for now.')"><span>✧</span> Discover</button>
-      </nav>
-      <div class="sidebar-note"><strong>Keep it in the moment.</strong><br>Snaps disappear. Good times don't.<small>SLAPCHAT · 2018</small></div>
-    </aside>
-
-    <main class="main-column">
-      <header class="topbar">
-        <a class="brand mobile-brand" href="#" aria-label="Slapchat home"><img src="./slapchat-icon.png?v=4" alt=""><span>slapchat</span></a>
-        <div class="topbar-actions">
-          <button class="help-trigger" type="button" onclick="openHelp()"><span aria-hidden="true">?</span><span class="help-label">How it works</span></button>
-          <button class="chat-trigger" type="button" aria-label="Open chats" onclick="openChats()">▤</button>
-        </div>
-      </header>
-
-      <section class="camera-stage" id="cameraStage" aria-label="Camera">
-        <div class="ambient-art" aria-hidden="true"><span class="sun"></span><span class="distant-hill"></span><span class="near-hill"></span></div>
-        <video class="camera-video" id="cameraVideo" autoplay muted playsinline></video>
-        <img class="captured-photo" id="capturedPhoto" alt="Your snap preview">
-        <div class="camera-topline">
-          <span class="story-pill"><span class="profile-emoji">🧑🏽</span><span>Your Story</span><span class="plus">+</span></span>
-          <span class="camera-status"><i></i><span id="cameraStatusText">CAMERA OFF</span></span>
-          <button type="button" class="switch-camera" aria-label="Switch camera" onclick="flipCamera()">↻</button>
-        </div>
-
-        <div class="camera-intro">
-          <span class="eyebrow">THE GOOD STUFF HAPPENS NOW</span>
-          <h1>Catch the<br>moment.</h1>
-          <p>Start the camera, then tap the yellow button for a snap.</p>
-          <div class="intro-actions">
-            <button type="button" class="button-primary" onclick="startCamera()">Start camera</button>
-            <button type="button" class="button-glass" onclick="usePhoneCamera()">Use iPhone camera</button>
-          </div>
-        </div>
-
-        <div class="caption-chip">golden hour kind of day <span>☀</span></div>
-        <div class="camera-controls">
-          <button type="button" class="camera-tool" aria-label="Memories" onclick="showToast('Saved snaps will live here.')">▧</button>
-          <button type="button" class="shutter" aria-label="Take a snap"><span></span></button>
-          <button type="button" class="camera-tool" aria-label="Lenses" onclick="showToast('Lenses are coming soon.')">✧</button>
-        </div>
-        <button type="button" class="retake-button" onclick="retakePhoto()">Retake</button>
-        <input class="visually-hidden" id="photoInput" type="file" accept="image/*" capture="environment" aria-label="Take or choose a photo">
-      </section>
-
-      <section class="stories" aria-labelledby="storiesTitle">
-        <div class="section-heading"><h2 id="storiesTitle">Stories</h2><p>Tap a friend to peek in</p></div>
-        <div class="story-list">
-          <button class="story-tile your-story" type="button" onclick="showToast('Posting a Story is coming soon.')"><span class="story-ring"><span class="story-avatar">+</span></span><span>You</span></button>
-          <button class="story-tile" type="button" onclick="viewStory('Maya')"><span class="story-ring"><span class="story-avatar">👩🏻</span></span><span>Maya</span></button>
-          <button class="story-tile" type="button" onclick="viewStory('Jordan')"><span class="story-ring"><span class="story-avatar">🧑🏾</span></span><span>Jordan</span></button>
-          <button class="story-tile" type="button" onclick="viewStory('Luca')"><span class="story-ring"><span class="story-avatar">🧔🏻</span></span><span>Luca</span></button>
-          <button class="story-tile seen" type="button" onclick="viewStory('Sam')"><span class="story-ring"><span class="story-avatar">👩🏽</span></span><span>Sam</span></button>
-          <button class="story-tile" type="button" onclick="viewStory('Ari')"><span class="story-ring"><span class="story-avatar">👨🏼</span></span><span>Ari</span></button>
-        </div>
-      </section>
-
-      <nav class="mobile-nav" aria-label="App navigation">
-        <button type="button" onclick="openChats()"><b>▣</b><span>Chats</span></button>
-        <button type="button" onclick="document.querySelector('.stories').scrollIntoView({behavior:'smooth'})"><b>◌</b><span>Stories</span></button>
-        <button type="button" class="selected" onclick="window.scrollTo({top:0,behavior:'smooth'})"><b>◉</b><span>Camera</span></button>
-        <button type="button" onclick="showToast('Discover is a preview for now.')"><b>✧</b><span>Discover</span></button>
-        <button type="button" onclick="openHelp()"><b>?</b><span>Help</span></button>
-      </nav>
-    </main>
-
-    <aside class="right-column">
-      <div class="friends-heading"><div><span class="eyebrow">YOUR LITTLE CORNER</span><h2>Your people <span>✌</span></h2></div><button type="button" aria-label="More options" onclick="openChats()">···</button></div>
-      <section class="friends-card" aria-label="Recent chats">
-        <div class="card-heading"><h3>Recent chats</h3><button type="button" onclick="openChats()">See all</button></div>
-        <button type="button" class="friend-row" onclick="openChats()"><span class="friend-avatar maya">👩🏻</span><span class="friend-copy"><b>Maya</b><small>😂 that was SO good · 2m</small></span><span class="unread-dot"></span></button>
-        <button type="button" class="friend-row" onclick="openChats()"><span class="friend-avatar jordan">🧑🏾</span><span class="friend-copy"><b>Jordan</b><small>Sent you a snap · just now</small></span><span class="unread-dot"></span></button>
-        <button type="button" class="friend-row" onclick="openChats()"><span class="friend-avatar luca">🧔🏻</span><span class="friend-copy"><b>Luca</b><small>streak check?</small></span></button>
-        <button type="button" class="friend-row" onclick="openChats()"><span class="friend-avatar sam">👩🏽</span><span class="friend-copy"><b>Sam</b><small>🔥 sent a snap</small></span></button>
-      </section>
-      <section class="streak-card"><span class="streak-flame">🔥</span><div><b>12 days and counting</b><p>You and Maya are on a roll.</p></div></section>
-      <section class="discover-card"><span class="eyebrow">A LITTLE SOMETHING</span><h3>Good energy<br>only.</h3><button type="button" onclick="showToast('Discover is a preview for now.')">Peek inside <span>↗</span></button><span class="discover-spark" aria-hidden="true">✳</span></section>
-      <div class="desktop-help"><button type="button" onclick="openHelp()">Need a hand? <span>Open the quick guide →</span></button></div>
-    </aside>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <div class="sheet-backdrop" id="helpOverlay" hidden onclick="if(event.target===this)closeOverlay('helpOverlay')">
-    <section class="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
-      <div class="sheet-heading"><div><span class="eyebrow">THE QUICK TOUR</span><h2 id="helpTitle">A few taps and you're in.</h2></div><button class="close-button" aria-label="Close guide" onclick="closeOverlay('helpOverlay')">×</button></div>
-      <div class="guide-item"><span>01</span><div><b>Take a snap</b><p>Start the camera or use your iPhone camera. Tap the yellow circle. Your snap stays in the preview.</p></div></div>
-      <div class="guide-item"><span>02</span><div><b>Catch up on Stories</b><p>Tap a friend's circle. Swipe the row to see everyone.</p></div></div>
-      <div class="guide-item"><span>03</span><div><b>Put Slapchat on your Home Screen</b><p>After the site is published, open it in Safari. Tap Share, then Add to Home Screen.</p></div></div>
-      <div class="guide-note">This is a demo. Sample chats and Stories don't send anything.</div>
-    </section>
-  </div>
-
-  <div class="sheet-backdrop" id="chatOverlay" hidden onclick="if(event.target===this)closeOverlay('chatOverlay')">
-    <section class="bottom-sheet chat-sheet" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
-      <div class="sheet-heading"><div><span class="eyebrow">YOUR PEOPLE</span><h2 id="chatTitle">Chats</h2></div><button class="close-button" aria-label="Close chats" onclick="closeOverlay('chatOverlay')">×</button></div>
-      <div id="chatList"></div>
-      <div class="guide-note">Sample conversations for now. Sending messages isn't connected yet.</div>
-    </section>
-  </div>
-
-  <script src="./app.js" defer></script>
+  <div id="root"></div>
+  <script type="module" src="./src/main.jsx"></script>
 </body>
 </html>
