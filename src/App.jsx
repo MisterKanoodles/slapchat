@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import CameraScreen from "./components/CameraScreen.jsx";
 import ChatsScreen from "./components/ChatsScreen.jsx";
 import HelpSheet from "./components/HelpSheet.jsx";
+import InstallHint from "./components/InstallHint.jsx";
 import StoriesScreen from "./components/StoriesScreen.jsx";
 import StoryViewer from "./components/StoryViewer.jsx";
 
@@ -78,8 +79,10 @@ export default function App() {
         </div>
       </main>
 
+      <InstallHint />
       {openStoryId && <StoryViewer friendId={openStoryId} onClose={closeStory} onSeen={markSeen} />}
       {helpOpen && <HelpSheet onClose={closeHelp} />}
+      <div className="rotate-hint" aria-hidden="true">Turn your phone upright to use Slapchat.</div>
       <div className={`toast${toast ? " is-visible" : ""}`} role="status" aria-live="polite">{toast}</div>
     </div>
   );

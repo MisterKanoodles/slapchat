@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { friendById, stories } from "../data/sampleData.js";
 
 const SNAP_DURATION_MS = 5000;
+const HOLD_MS = 200;
 
-// Full-screen story player: tap right to advance, tap left to go back, auto-advances.
+// Full-screen story player: tap right to advance, tap left to go back, press and hold to pause.
 export default function StoryViewer({ friendId, onClose, onSeen }) {
   const [storyIndex, setStoryIndex] = useState(() => stories.findIndex((story) => story.friendId === friendId));
   const [snapIndex, setSnapIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const remainingRef = useRef(SNAP_DURATION_MS);
+  const holdTimerRef = useRef(null);
+  const heldRef = useRef(false);
   const story = stories[storyIndex];
 
   useEffect(() => {
@@ -32,9 +37,20 @@ export default function StoryViewer({ friendId, onClose, onSeen }) {
     }
   }
 
+  // Each new snap gets the full duration.
   useEffect(() => {
-    const timer = setTimeout(next, SNAP_DURATION_MS);
-    return () => clearTimeout(timer);
+    remainingRef.current = SNAP_DURATION_MS;
+  }, [storyIndex, snapIndex]);
+
+  // Count down whatever is left of the current snap while not paused.
+  useEffect(() => {
+    if (paused) return undefined;
+    const startedAt = performance.now();
+    const timer = setTimeout(next, remainingRef.current);
+    return () => {
+      clearTimeout(timer);
+      remainingRef.current = Math.max(0, remainingRef.current - (performance.now() - startedAt));
+    };
   });
 
   useEffect(() => {
@@ -51,18 +67,43 @@ export default function StoryViewer({ friendId, onClose, onSeen }) {
   const friend = friendById(story.friendId);
   const snap = story.snaps[snapIndex];
 
-  function onTap(event) {
+  function onPointerDown() {
+    heldRef.current = false;
+    holdTimerRef.current = setTimeout(() => {
+      heldRef.current = true;
+      setPaused(true);
+    }, HOLD_MS);
+  }
+
+  function onPointerUp(event) {
+    clearTimeout(holdTimerRef.current);
+    if (heldRef.current) {
+      setPaused(false);
+      return;
+    }
     const { left, width } = event.currentTarget.getBoundingClientRect();
     if (event.clientX - left < width / 3) previous();
     else next();
   }
 
+  function onPointerCancel() {
+    clearTimeout(holdTimerRef.current);
+    setPaused(false);
+  }
+
   return (
     <div className="story-viewer" role="dialog" aria-modal="true" aria-label={`${friend.name}'s Story`}>
-      <div className="story-snap" style={{ background: snap.background }} onClick={onTap}>
+      <div
+        className="story-snap"
+        style={{ background: snap.background }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerCancel}
+        onContextMenu={(event) => event.preventDefault()}
+      >
         <p className="story-caption">{snap.caption}</p>
       </div>
-      <div className="story-progress">
+      <div className={`story-progress${paused ? " is-paused" : ""}`}>
         {story.snaps.map((_, index) => (
           <span key={`${story.friendId}-${index}`}>
             <i

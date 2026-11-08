@@ -3,8 +3,9 @@ import { useEffect } from "react";
 const steps = [
   ["Take a snap", "Turn on the camera and tap the big circle. Double-tap the screen to flip cameras."],
   ["Swipe around", "Swipe right for Chats, left for Stories. Swipe back to return to the camera."],
-  ["Watch Stories", "Tap a friend to play their Story. Tap the right side to skip, the left to go back."],
-  ["Add to Home Screen", "In Safari, tap Share, then Add to Home Screen. Slapchat opens full screen like an app."]
+  ["Watch Stories", "Tap a friend to play their Story. Tap right to skip, left to go back, and press and hold to pause."],
+  ["Add to Home Screen", "In Safari, tap Share, then Add to Home Screen. Slapchat opens full screen like an app."],
+  ["Save a snap", "After snapping, tap the save button and choose Save Image to put it in Photos."]
 ];
 
 export default function HelpSheet({ onClose }) {

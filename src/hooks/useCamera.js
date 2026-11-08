@@ -76,12 +76,13 @@ export function useCamera() {
       .catch(() => {});
   }, []);
 
-  // iOS ends the stream when the app is backgrounded; restart it on return.
+  // iOS ends or freezes the stream when the app is backgrounded; revive it on return.
   useEffect(() => {
     function onVisibility() {
       if (document.visibilityState !== "visible" || !streamRef.current) return;
       const ended = streamRef.current.getVideoTracks().every((track) => track.readyState === "ended");
       if (ended) start();
+      else if (videoRef.current?.paused) videoRef.current.play().catch(() => start());
     }
     document.addEventListener("visibilitychange", onVisibility);
     return () => document.removeEventListener("visibilitychange", onVisibility);

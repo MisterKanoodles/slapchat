@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useCamera } from "../hooks/useCamera.js";
 
 const statusMessages = {
-  unsupported: "Live camera needs the HTTPS site. You can still use your phone's camera.",
-  denied: "Camera access was blocked. Allow it in Settings, or use your phone's camera."
+  unsupported: "Live camera needs the HTTPS site. You can still use the iPhone camera.",
+  denied: "Camera access was blocked. Allow it in Settings › Safari › Camera, or use the iPhone camera."
 };
 
 function ChatIcon() {
@@ -22,6 +22,7 @@ export default function CameraScreen({ onOpenChats, onOpenStories, onOpenHelp, s
   const { videoRef, status, facing, start, flip, capture } = useCamera();
   const [photo, setPhoto] = useState(null);
   const fileInputRef = useRef(null);
+  const lastTapRef = useRef(0);
 
   // Revoke object URLs from the native picker once they're replaced.
   useEffect(() => () => {
@@ -52,17 +53,41 @@ export default function CameraScreen({ onOpenChats, onOpenStories, onOpenHelp, s
     if (file) setPhoto(URL.createObjectURL(file));
   }
 
-  function saveSnap() {
+  // iOS ignores download links for images, so hand the snap to the share sheet ("Save Image").
+  async function saveSnap() {
+    const blob = await fetch(photo).then((response) => response.blob());
+    const file = new File([blob], `slapchat-${Date.now()}.jpg`, { type: blob.type || "image/jpeg" });
+    if (navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file] });
+      } catch (error) {
+        if (error.name !== "AbortError") showToast("Couldn't save that snap.");
+      }
+      return;
+    }
     const link = document.createElement("a");
-    link.href = photo;
-    link.download = `slapchat-${Date.now()}.jpg`;
+    link.href = URL.createObjectURL(blob);
+    link.download = file.name;
     link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  // Double-tap anywhere that isn't a control flips the camera. iOS doesn't fire dblclick reliably.
+  function onScreenTap(event) {
+    if (status !== "live" || photo || event.target.closest("button")) return;
+    const now = event.timeStamp;
+    if (now - lastTapRef.current < 300) {
+      lastTapRef.current = 0;
+      flipCamera();
+    } else {
+      lastTapRef.current = now;
+    }
   }
 
   const isLive = status === "live";
 
   return (
-    <section className="camera-screen" aria-label="Camera" onDoubleClick={isLive && !photo ? flipCamera : undefined}>
+    <section className="camera-screen" aria-label="Camera" onPointerUp={onScreenTap}>
       {!isLive && <div className="camera-placeholder" aria-hidden="true" />}
       <video
         ref={videoRef}
@@ -95,7 +120,7 @@ export default function CameraScreen({ onOpenChats, onOpenStories, onOpenHelp, s
 
           {!isLive && (
             <div className="camera-intro">
-              <img src="./icon.svg?v=3" alt="" className="camera-intro-logo" />
+              <img src="./slapchat-icon.png?v=4" alt="" className="camera-intro-logo" />
               <h1>Catch the moment.</h1>
               <p>{statusMessages[status] ?? "Turn on the camera to start snapping."}</p>
               <div className="camera-intro-actions">
@@ -104,7 +129,7 @@ export default function CameraScreen({ onOpenChats, onOpenStories, onOpenHelp, s
                     {status === "starting" ? "Starting…" : "Turn on camera"}
                   </button>
                 )}
-                <button type="button" className="button-glass" onClick={openNativeCamera}>Use phone camera</button>
+                <button type="button" className="button-glass" onClick={openNativeCamera}>Use iPhone camera</button>
               </div>
             </div>
           )}
